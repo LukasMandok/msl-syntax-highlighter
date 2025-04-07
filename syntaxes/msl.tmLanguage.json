@@ -1,0 +1,128 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "MSL",
+    "scopeName": "source.msl",
+    "fileTypes": ["msl"],
+    "patterns": [
+        { "include": "#comments" },
+        { "include": "#odbpaths" },
+        { "include": "#variables" },
+        { "include": "#constants" },
+        { "include": "#operators" },
+        { "include": "#keywords" },
+        { "include": "#odbfunctions" },
+        { "include": "#functions" },
+        { "include": "#numbers" },
+        { "include": "#strings" }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.number-sign",
+                    "match": "^\\s*#+.*$"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.conditional",
+                    "match": "\\b(IF|ELSE|ENDIF)\\b"
+                },
+                {
+                    "name": "keyword.control.loop",
+                    "match": "\\b(LOOP|ENDLOOP|BREAK)\\b"
+                },
+                {
+                    "name": "entity.name.class",
+                    "match": "\\b(SUBROUTINE|ENDSUBROUTINE|CALL|LIBRARY)\\b"
+                },
+                {
+                    "name": "keyword.other",
+                    "match": "\\b(MSG|WAIT|CAT)\\b"
+                }
+            ]
+        },
+        "variables": {
+            "patterns": [
+                {
+                    "name": "variable.other",
+                    "match": "\\$(?:[A-Za-z_][A-Za-z0-9_]*|\\d+)"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "name": "constant.numeric",
+                    "match": "\\b\\d+(\\.\\d+)?\\b"
+                }
+            ]
+        },
+        "constants": {
+            "name": "constant.language",
+            "match": "\\b(ON|OFF|TRUE|FALSE)\\b"
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.double",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape",
+                            "match": "\\\\."
+                        }
+                    ]
+                }
+            ]
+        },
+        "operators": {
+            "name": "keyword.operator",
+            "match": "=|==|>|<|>=|<="
+        },
+        "odbpaths": {
+            "_legacy": {
+                "begin": "(?:(\\$[A-Za-z_][A-Za-z0-9_]*)(\\/))|(\\/)",
+                "beginCaptures": {
+                    "1": { "name": "variable.other" },
+                    "2": { "name": "constant.other.odb-path" },
+                    "3": { "name": "constant.other.odb-path" }
+                },
+                "contentName": "constant.other.odb-path",
+                "patterns": [
+                    { "include": "#variables" }
+                ]
+            },
+            "begin": "(?:(\\$[A-Za-z_][A-Za-z0-9_]*)(\\/))|(\\/)",
+            "beginCaptures": {
+                "1": { "name": "variable.other" },
+                "2": { "name": "constant.other.odb-path" },
+                "3": { "name": "constant.other.odb-path" }
+            },
+            "end": "(?=\\s*[,\\r\\n])",
+            "contentName": "constant.other.odb-path",
+            "patterns": [
+                { "include": "#variables" }
+            ]
+        },
+        "odbfunctions": {
+            "patterns": [
+                {
+                    "name": "support.function",
+                    "match": "\\b(ODBGET|ODBLOAD|ODBSET|ODBLOOKUP)\\b"
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "name": "entity.name.function",
+                    "match": "(?<=\\b(?:SUBROUTINE|CALL)\\s+)[A-Za-z_][A-Za-z0-9_]*"
+                }
+            ]
+        }
+    }
+}

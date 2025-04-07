@@ -1,0 +1,25 @@
+{
+  "name": "msl-syntax-highlighter",
+  "displayName": "MSL Syntax Highlighter",
+  "description": "Syntax highlighting for MSL files",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.99.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "msl",
+      "aliases": ["Midas Script Language", "msl", "MSL"],
+      "extensions": [".msl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "msl",
+      "scopeName": "source.msl",
+      "path": "./syntaxes/msl.tmLanguage.json"
+    }]
+  }
+}
