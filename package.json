@@ -1,8 +1,17 @@
 {
   "name": "msl-syntax-highlighter",
   "displayName": "MSL Syntax Highlighter",
-  "description": "Syntax highlighting for MSL files",
+  "description": "Syntax highlighting for MSL code",
   "version": "0.0.1",
+  "publisher": "LukasMandok",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LukasMandok/msl-syntax-highlighter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LukasMandok/msl-syntax-highlighter/issues"
+  },
+  "homepage": "https://github.com/LukasMandok/msl-syntax-highlighter#readme",
   "engines": {
     "vscode": "^1.99.0"
   },
