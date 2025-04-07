@@ -1,2 +1,15 @@
-node_modules
+# Standard VSCode extension ignores
+node_modules/
+out/
+dist/
 *.vsix
+.vscode/**
+!vscode/
+
+# IDE specific
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
