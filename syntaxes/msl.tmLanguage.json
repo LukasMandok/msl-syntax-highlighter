@@ -16,8 +16,11 @@
         { "include": "#constants" },
         { "include": "#operators" },
         { "include": "#keywords" },
+        { "include": "#packageImport" },
         { "include": "#odbfunctions" },
+        { "include": "#builtinFunctions" },
         { "include": "#functions" },
+        { "include": "#functionCalls" },
         { "include": "#types" },
         { "include": "#numbers" },
         { "include": "#strings" }
@@ -50,7 +53,7 @@
                     "match": "\\b(PARAM|LIBRARY|INCLUDE)\\b"
                 },
                 {
-                    "name": "keyword.other",
+                    "name": "function.support.builtin",
                     "match": "\\b(MSG|WAIT|CAT|COMMENT|MESSAGE)\\b"
                 }
             ]
@@ -59,7 +62,11 @@
             "patterns": [
                 {
                     "name": "variable.other",
-                    "match": "\\$(?:[A-Za-z_][A-Za-z0-9_]*|\\d+)"
+                    "match": "\\$(?:[A-Za-z_][A-Za-z0-9_]*)(?!\\d)|\\$(?:[A-Za-z_][A-Za-z0-9_]*)(?!\\d+)"
+                },
+                {
+                    "name": "variable.other",
+                    "match": "(?<=\\b(?:CAT\\s+|,\\s*|LOOP\\s+))\\b[A-Za-z_][A-Za-z0-9_]*\\b"
                 }
             ]
         },
@@ -74,8 +81,8 @@
         "variableParameter": {
             "patterns": [
                 {
-                    "name": "variable.other.parameter",
-                    "match": "(?<=\\b(?:CAT\\s+|,\\s*|LOOP\\s+))\\b[A-Za-z_][A-Za-z0-9_]*\\b"
+                    "name": "variable.parameter",
+                    "match": "\\$\\d+"
                 }
             ]
         },
@@ -128,11 +135,13 @@
                 "1": { "name": "variable.other" },
                 "2": { "name": "constant.other.odb-path" },
                 "3": { "name": "constant.other.odb-path" }
-            },
+            },  
             "end": "(?=\\s*[,\\r\\n])",
             "contentName": "constant.other.odb-path",
             "patterns": [
-                { "include": "#variables" }
+                { "include": "#variables" },
+                { "include": "#variableParameter" },
+                { "include": "#numbers"}
             ]
         },
         "odbpathsFull": {
@@ -151,11 +160,27 @@
                 }
             ]
         },
+        "builtinFunctions": {
+            "patterns": [
+                {
+                    "name": "support.function.builtin",
+                    "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b(?=\\s*\\()"
+                }
+            ]
+        },
         "functions": {
             "patterns": [
                 {
                     "name": "entity.name.function",
-                    "match": "(?<=\\b(?:SUBROUTINE|CALL)\\s+)[A-Za-z_][A-Za-z0-9_]*"
+                    "match": "(?<=\\bSUBROUTINE\\s+)[A-Za-z_][A-Za-z0-9_]*"
+                }
+            ]
+        },
+        "functionCalls": {
+            "patterns": [
+                {
+                    "name": "entity.name.function",
+                    "match": "(?<=\\bCALL\\s+)[A-Za-z_][A-Za-z0-9_]*"
                 }
             ]
         },
@@ -173,6 +198,8 @@
                 { "include": "#comments" },
                 { "include": "#keywords" },
                 { "include": "#functions" },
+                { "include": "#functionCalls" },
+                { "include": "#builtinFunctions" },
                 { "include": "#variables" },
                 { "include": "#variableAssignment"},
                 { "include": "#variableParameter" },
@@ -199,6 +226,8 @@
                 { "include": "#comments" },
                 { "include": "#keywords" },
                 { "include": "#functions" },
+                { "include": "#functionCalls" },
+                { "include": "#builtinFunctions" },
                 { "include": "#variables" },
                 { "include": "#variableAssignment"},
                 { "include": "#variableParameter" },
@@ -225,6 +254,8 @@
                 { "include": "#comments" },
                 { "include": "#keywords" },
                 { "include": "#functions" },
+                { "include": "#functionCalls" },
+                { "include": "#builtinFunctions" },
                 { "include": "#variables" },
                 { "include": "#variableAssignment"},
                 { "include": "#variableParameter" },
@@ -242,6 +273,14 @@
                 {
                     "name": "storage.type",
                     "match": "\\b(STRING|INT32|SECONDS)\\b"
+                }
+            ]
+        },
+        "packageImport": {
+            "patterns": [
+                {
+                    "name": "storage.modifier.import",
+                    "match": "(?<=\\bINCLUDE\\s+)[A-Za-z0-9_.]+"
                 }
             ]
         }
