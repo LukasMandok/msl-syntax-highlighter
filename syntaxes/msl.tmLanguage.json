@@ -12,6 +12,7 @@
         { "include": "#odbpathsFull" },
         { "include": "#variables" },
         { "include": "#variableAssignment" },
+        { "include": "#variableParameter" },
         { "include": "#constants" },
         { "include": "#operators" },
         { "include": "#keywords" },
@@ -67,6 +68,14 @@
                 {
                     "name": "variable.other.definition",
                     "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b(?=\\s*=)"
+                }
+            ]
+        },
+        "variableParameter": {
+            "patterns": [
+                {
+                    "name": "variable.other.parameter",
+                    "match": "(?<=\\b(?:CAT\\s+|,\\s*|LOOP\\s+))\\b[A-Za-z_][A-Za-z0-9_]*\\b"
                 }
             ]
         },
@@ -165,10 +174,13 @@
                 { "include": "#keywords" },
                 { "include": "#functions" },
                 { "include": "#variables" },
+                { "include": "#variableAssignment"},
+                { "include": "#variableParameter" },
                 { "include": "#constants" },
                 { "include": "#operators" },
                 { "include": "#odbfunctions" },
                 { "include": "#odbpaths" },
+                { "include": "#odbpathsFull" },
                 { "include": "#numbers" },
                 { "include": "#strings" }
             ]
@@ -188,10 +200,13 @@
                 { "include": "#keywords" },
                 { "include": "#functions" },
                 { "include": "#variables" },
+                { "include": "#variableAssignment"},
+                { "include": "#variableParameter" },
                 { "include": "#constants" },
                 { "include": "#operators" },
                 { "include": "#odbfunctions" },
                 { "include": "#odbpaths" },
+                { "include": "#odbpathsFull" },
                 { "include": "#numbers" },
                 { "include": "#strings" }
             ]
@@ -211,10 +226,13 @@
                 { "include": "#keywords" },
                 { "include": "#functions" },
                 { "include": "#variables" },
+                { "include": "#variableAssignment"},
+                { "include": "#variableParameter" },
                 { "include": "#constants" },
                 { "include": "#operators" },
                 { "include": "#odbfunctions" },
                 { "include": "#odbpaths" },
+                { "include": "#odbpathsFull" },
                 { "include": "#numbers" },
                 { "include": "#strings" }
             ]
