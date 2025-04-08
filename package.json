@@ -2,7 +2,7 @@
   "name": "msl-syntax-highlighter",
   "displayName": "MSL Syntax Highlighter",
   "description": "Syntax highlighting for MSL code",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "LukasMandok",
   "repository": {
     "type": "git",
