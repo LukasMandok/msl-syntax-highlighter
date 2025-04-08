@@ -115,7 +115,7 @@
         },
         "operators": {
             "name": "keyword.operator",
-            "match": "=|==|>|<|>=|<="
+            "match": "=|==|>|<|>=|<=|(?:/(?!\\w))|\\+|\\-|\\*"
         },
         "odbpaths": {
             "_legacy": {
@@ -157,6 +157,10 @@
                 {
                     "name": "support.function",
                     "match": "\\b(ODBGET|ODBLOAD|ODBSET|ODBLOOKUP|ODBCREATE|ODBDELETE|ODBSAVE)\\b"
+                },
+                {
+                    "name": "variable.other",
+                    "match": "(?<=(ODBGET|ODBLOAD|ODBSET|ODBLOOKUP|ODBCREATE|ODBDELETE|ODBSAVE)\\s+[^,]*,\\s*)\\b[A-Za-z_][A-Za-z0-9_]*\\b"
                 }
             ]
         },
@@ -209,7 +213,8 @@
                 { "include": "#odbpaths" },
                 { "include": "#odbpathsFull" },
                 { "include": "#numbers" },
-                { "include": "#strings" }
+                { "include": "#strings" },
+                { "include": "#types" }
             ]
         },
         "loopBlock": {
@@ -237,7 +242,8 @@
                 { "include": "#odbpaths" },
                 { "include": "#odbpathsFull" },
                 { "include": "#numbers" },
-                { "include": "#strings" }
+                { "include": "#strings" },
+                { "include": "#types" }
             ]
         },
         "subroutineBlock": {
@@ -265,7 +271,8 @@
                 { "include": "#odbpaths" },
                 { "include": "#odbpathsFull" },
                 { "include": "#numbers" },
-                { "include": "#strings" }
+                { "include": "#strings" },
+                { "include": "#types" }
             ]
         },
         "types": {

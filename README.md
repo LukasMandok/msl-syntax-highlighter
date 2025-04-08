@@ -65,3 +65,7 @@ Added further parameter variables
 #### 0.0.6
 
 Added some more builtin functions and parameters
+
+#### 0.0.7
+
+Updated README
