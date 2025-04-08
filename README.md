@@ -20,3 +20,15 @@ None
 ### 0.0.1
 
 Initial release
+
+### 0.0.2 
+
+Enable for older VSCode Versions
+
+### 0.0.3
+
+Added further Keywords
+
+#### 0.0.4 
+
+Added odb save

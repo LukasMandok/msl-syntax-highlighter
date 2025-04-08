@@ -5,13 +5,19 @@
     "fileTypes": ["msl"],
     "patterns": [
         { "include": "#comments" },
+        { "include": "#ifBlock" },
+        { "include": "#loopBlock" },
+        { "include": "#subroutineBlock" },
         { "include": "#odbpaths" },
+        { "include": "#odbpathsFull" },
         { "include": "#variables" },
+        { "include": "#variableAssignment" },
         { "include": "#constants" },
         { "include": "#operators" },
         { "include": "#keywords" },
         { "include": "#odbfunctions" },
         { "include": "#functions" },
+        { "include": "#types" },
         { "include": "#numbers" },
         { "include": "#strings" }
     ],
@@ -20,7 +26,7 @@
             "patterns": [
                 {
                     "name": "comment.line.number-sign",
-                    "match": "^\\s*#+.*$"
+                    "match": "(?<=\\s|^)(#+.*)"
                 }
             ]
         },
@@ -36,11 +42,15 @@
                 },
                 {
                     "name": "entity.name.class",
-                    "match": "\\b(SUBROUTINE|ENDSUBROUTINE|CALL|LIBRARY)\\b"
+                    "match": "\\b(SUBROUTINE|ENDSUBROUTINE|CALL)\\b"
+                },
+                {
+                    "name": "keyword.control",
+                    "match": "\\b(PARAM|LIBRARY|INCLUDE)\\b"
                 },
                 {
                     "name": "keyword.other",
-                    "match": "\\b(MSG|WAIT|CAT)\\b"
+                    "match": "\\b(MSG|WAIT|CAT|COMMENT|MESSAGE)\\b"
                 }
             ]
         },
@@ -49,6 +59,14 @@
                 {
                     "name": "variable.other",
                     "match": "\\$(?:[A-Za-z_][A-Za-z0-9_]*|\\d+)"
+                }
+            ]
+        },
+        "variableAssignment": {
+            "patterns": [
+                {
+                    "name": "variable.other.definition",
+                    "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b(?=\\s*=)"
                 }
             ]
         },
@@ -69,7 +87,7 @@
                 {
                     "name": "string.quoted.double",
                     "begin": "\"",
-                    "end": "\"",
+                    "end": "\"|(?=\\r?\\n)",
                     "patterns": [
                         {
                             "name": "constant.character.escape",
@@ -108,11 +126,19 @@
                 { "include": "#variables" }
             ]
         },
+        "odbpathsFull": {
+            "patterns": [
+                {
+                    "name": "constant.other.odb-path",
+                    "match": "\\b(?:\\$?[A-Za-z_][A-Za-z0-9_]*)(?:\\/[A-Za-z_][A-Za-z0-9_]*)+\\b"
+                }
+            ]
+        },
         "odbfunctions": {
             "patterns": [
                 {
                     "name": "support.function",
-                    "match": "\\b(ODBGET|ODBLOAD|ODBSET|ODBLOOKUP)\\b"
+                    "match": "\\b(ODBGET|ODBLOAD|ODBSET|ODBLOOKUP|ODBCREATE|ODBDELETE|ODBSAVE)\\b"
                 }
             ]
         },
@@ -121,6 +147,83 @@
                 {
                     "name": "entity.name.function",
                     "match": "(?<=\\b(?:SUBROUTINE|CALL)\\s+)[A-Za-z_][A-Za-z0-9_]*"
+                }
+            ]
+        },
+        "ifBlock": {
+            "begin": "(\\bIF\\b)",
+            "beginCaptures": {
+                "1": { "name": "keyword.control.conditional" }
+            },
+            "end": "(\\bENDIF\\b)",
+            "endCaptures": {
+                "1": { "name": "keyword.control.conditional" }
+            },
+            "name": "meta.block.conditional.msl",
+            "patterns": [
+                { "include": "#comments" },
+                { "include": "#keywords" },
+                { "include": "#functions" },
+                { "include": "#variables" },
+                { "include": "#constants" },
+                { "include": "#operators" },
+                { "include": "#odbfunctions" },
+                { "include": "#odbpaths" },
+                { "include": "#numbers" },
+                { "include": "#strings" }
+            ]
+        },
+        "loopBlock": {
+            "begin": "(\\bLOOP\\b)",
+            "beginCaptures": {
+                "1": { "name": "keyword.control.loop" }
+            },
+            "end": "(\\bENDLOOP\\b)",
+            "endCaptures": {
+                "1": { "name": "keyword.control.loop" }
+            },
+            "name": "meta.block.loop.msl",
+            "patterns": [
+                { "include": "#comments" },
+                { "include": "#keywords" },
+                { "include": "#functions" },
+                { "include": "#variables" },
+                { "include": "#constants" },
+                { "include": "#operators" },
+                { "include": "#odbfunctions" },
+                { "include": "#odbpaths" },
+                { "include": "#numbers" },
+                { "include": "#strings" }
+            ]
+        },
+        "subroutineBlock": {
+            "begin": "(\\bSUBROUTINE\\b)",
+            "beginCaptures": {
+                "1": { "name": "entity.name.class" }
+            },
+            "end": "(\\bENDSUBROUTINE\\b)",
+            "endCaptures": {
+                "1": { "name": "entity.name.class" }
+            },
+            "name": "meta.block.subroutine.msl",
+            "patterns": [
+                { "include": "#comments" },
+                { "include": "#keywords" },
+                { "include": "#functions" },
+                { "include": "#variables" },
+                { "include": "#constants" },
+                { "include": "#operators" },
+                { "include": "#odbfunctions" },
+                { "include": "#odbpaths" },
+                { "include": "#numbers" },
+                { "include": "#strings" }
+            ]
+        },
+        "types": {
+            "patterns": [
+                {
+                    "name": "storage.type",
+                    "match": "\\b(STRING|INT32|SECONDS)\\b"
                 }
             ]
         }
